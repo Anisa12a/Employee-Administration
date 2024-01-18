@@ -1,0 +1,31 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EmployeeAdministration.Entities
+{
+    public class Task
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TaskId { get; set; }
+
+        [Required(ErrorMessage = "Task Title si required!")]
+        [StringLength(40, MinimumLength = 5, ErrorMessage = "Task Title must be between 5 and 40 characters!")]
+        public string TaskTitle { get; set; } = string.Empty;
+
+
+        [StringLength(60, ErrorMessage = "Task Description cannot exceed 60 characters!")]
+        public string TaskDescription { get; set; } = string.Empty;
+
+
+        [Required(ErrorMessage = "Due Date of the task is required!")]
+        [DataType(DataType.Date, ErrorMessage = "Invalid date format!")]
+        public DateTime TaskDueDate { get; set; }
+
+
+        [Required(ErrorMessage = "Task status is required!")]
+        [StringLength(15)]
+        public string TaskStatus { get; set; } = string.Empty;
+        public int ProjectId { get; internal set; }
+    }
+}
